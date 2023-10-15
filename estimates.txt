@@ -1,0 +1,12 @@
+Definitions
+---
+RTO is the time frame within which an asset (network, service) must come back online if it goes down.
+RPO is the acceptable amount of data (measured by time) we are willing to lose in case of an incident.
+
+Estimations
+---
+For a single AZ outage, it takes about 1-2 minutes for AWS to start a new RDS instance in another AZ, so the RTO is 1-2 minutes.
+In this case, because we failover from Primary database to Secondary database. So there is no data loss, this means the RPO is 0.
+
+For a region outage, it takes about 3-5 minutes for promoting the replica, so the RTO is 3-5 minutes.
+In this case, because reading replica is asynchronous cross region, so the RPO is 6-10 minutes.
